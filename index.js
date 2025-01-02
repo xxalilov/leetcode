@@ -1,32 +1,79 @@
-// Roman to Integer
+// Longest Common Prefix
 /**
- * @param {string} s
- * @return {number}
+ * @param {string[]} strs
+ * @return {string}
  */
-var romanToInt = function(s) {
-const values = {
-    "I":1,
-    "V": 5,
-    "X": 10,
-    "L": 50,
-    "C": 100,
-    "D": 500,
-    "M": 1000
-}
-let result = 0
-let str = s;
-for(let i = 0; i < str.length; i++) {
-    if(values[str[i]] < values[str[i+1]]) {
-        result = result - values[str[i]]
-    } else {
-        result = result + values[str[i]]
-    }
-}
+var longestCommonPrefix = function(strs) {
+    // 1-way
+    // let resultStr = "";
+    // if(strs.length === 1 && strs[0].length === 1) {
+    //     return strs[0]
+    // }
+    //
+    // for(let i = 0; i<strs[0].length; i++) {
+    //     let count = 0;
+    //     for(let j = 1; j <= strs.length-1; j++) {
+    //         if(strs[0][i] === strs[j][i]) {
+    //             count = count+1;
+    //             if(count === strs.length-1) {
+    //                 resultStr = resultStr + strs[0][i];
+    //             }
+    //         } else {
+    //             return resultStr;
+    //         }
+    //     }
+    // }
+    // return resultStr;
+    //2-way
+    if (strs.length === 0) return ""; // Agar massiv bo'sh bo'lsa
+    if (strs.length === 1) return strs[0]; // Faqat bitta so'z bo'lsa
 
-return result;
+    // 1-so'zni boshlang'ich prefix sifatida qabul qilish
+    let prefix = strs[0];
+
+    for (let i = 1; i < strs.length; i++) {
+        while (strs[i].indexOf(prefix) !== 0) {
+            // Prefixni qisqartirib borish
+            prefix = prefix.slice(0, -1);
+            if (prefix === "") return ""; // Agar umumiy prefix bo'lmasa
+        }
+    }
+
+    return prefix;
 };
 
-console.log(romanToInt("MCMXCIV"))
+console.log(longestCommonPrefix(["flower","flow","flight"]))
+
+
+// // Roman to Integer
+// /**
+//  * @param {string} s
+//  * @return {number}
+//  */
+// var romanToInt = function(s) {
+// const values = {
+//     "I":1,
+//     "V": 5,
+//     "X": 10,
+//     "L": 50,
+//     "C": 100,
+//     "D": 500,
+//     "M": 1000
+// }
+// let result = 0
+// let str = s;
+// for(let i = 0; i < str.length; i++) {
+//     if(values[str[i]] < values[str[i+1]]) {
+//         result = result - values[str[i]]
+//     } else {
+//         result = result + values[str[i]]
+//     }
+// }
+//
+// return result;
+// };
+//
+// console.log(romanToInt("MCMXCIV"))
 
 
 // // Palindrome number
