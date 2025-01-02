@@ -1,19 +1,50 @@
-// Palindrome number
+// Roman to Integer
 /**
- * @param {number} x
- * @return {boolean}
+ * @param {string} s
+ * @return {number}
  */
-var isPalindrome = function(x) {
- if(x < 0) return false;
- let number = x.toString();
- let reversedNumber = ``;
- for(let i = 1; i<= number.length; i++) {
-     reversedNumber = `${reversedNumber}${number[number.length-i]}`
- }
- return number === reversedNumber;
+var romanToInt = function(s) {
+const values = {
+    "I":1,
+    "V": 5,
+    "X": 10,
+    "L": 50,
+    "C": 100,
+    "D": 500,
+    "M": 1000
+}
+let result = 0
+let str = s;
+for(let i = 0; i < str.length; i++) {
+    if(values[str[i]] < values[str[i+1]]) {
+        result = result - values[str[i]]
+    } else {
+        result = result + values[str[i]]
+    }
+}
+
+return result;
 };
 
-console.log(isPalindrome(1222))
+console.log(romanToInt("MCMXCIV"))
+
+
+// // Palindrome number
+// /**
+//  * @param {number} x
+//  * @return {boolean}
+//  */
+// var isPalindrome = function(x) {
+//  if(x < 0) return false;
+//  let number = x.toString();
+//  let reversedNumber = ``;
+//  for(let i = 1; i<= number.length; i++) {
+//      reversedNumber = `${reversedNumber}${number[number.length-i]}`
+//  }
+//  return number === reversedNumber;
+// };
+//
+// console.log(isPalindrome(1222))
 
 
 // Two Sum
